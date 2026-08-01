@@ -3,7 +3,7 @@ Author : schwesterium
 Date   : 2026/08/01
 */
 
-using SchwesteriumLibrary.Input.ContollePath;
+using SchwesteriumLibrary.Input.ControlPath;
 using UnityEngine.InputSystem;
 
 namespace SchwesteriumLibrary.Input
