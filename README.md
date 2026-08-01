@@ -4,4 +4,5 @@ Unitプロジェクト間で再利用できる機能をまとめたライブラ�
 ## 名前空間
 - `SchwesteriumLibrary.Camera`
 - `SchwesteriumLibrary.Input`
+    - `.ControllePath`
 - `SchwesteriumLibrary.Editoe`
