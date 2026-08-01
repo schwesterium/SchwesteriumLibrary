@@ -6,7 +6,7 @@ Unitプロジェクト間で再利用できる機能をまとめたライブラ�
 - `SchwesteriumLibrary.Collections`
 - `SchwesteriumLibrary.Editor`
 - `SchwesteriumLibrary.Input`
-    - `.ControllePath`
+    - `.ControlPath`
 - `SchwesteriumLibrary.Timeline`
 - `SchwesteriumLibrary.UI`
 - `SchwesteriumLibrary.Utility`
