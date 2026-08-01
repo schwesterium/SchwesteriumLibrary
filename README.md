@@ -5,4 +5,7 @@ Unitプロジェクト間で再利用できる機能をまとめたライブラ�
 - `SchwesteriumLibrary.Camera`
 - `SchwesteriumLibrary.Input`
     - `.ControllePath`
-- `SchwesteriumLibrary.Editoe`
+- `SchwesteriumLibrary.UI`
+- `SchwesteriumLibrary.Utility`
+- `SchwesteriumLibrary.Collections`
+- `SchwesteriumLibrary.Editor`
