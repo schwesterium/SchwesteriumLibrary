@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+Author : schwesterium
+Date   : 2026/08/01
+*/
+
+
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;

@@ -1,4 +1,10 @@
-﻿using TMPro;
+﻿/*
+Author : schwesterium
+Date   : 2026/08/01
+*/
+
+
+using TMPro;
 using UnityEngine;
 
 namespace SchwesteriumLibrary.UI

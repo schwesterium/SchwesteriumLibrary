@@ -1,3 +1,9 @@
+/*
+Author : schwesterium
+Date   : 2026/08/01
+*/
+
+
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;

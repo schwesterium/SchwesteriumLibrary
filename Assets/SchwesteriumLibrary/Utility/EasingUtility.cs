@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+Author : schwesterium
+Date   : 2026/08/01
+*/
+
+
+using System;
 using UnityEngine;
 
 namespace SchwesteriumLibrary.Utility
