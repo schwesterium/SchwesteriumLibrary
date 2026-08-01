@@ -108,4 +108,5 @@ InitTestScene*.unity*
 
 /[Aa]ssets
 !/[Aa]ssets/SchwesteriumLibrary
+!/[Aa]ssets/Work
 /ProjectSettings
