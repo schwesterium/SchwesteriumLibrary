@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -107,13 +107,13 @@ namespace SchwesteriumLibrary.Editor
         {
             if (string.IsNullOrEmpty(_className))
             {
-                EditorUtility.DisplayDialog("Error", "ƒNƒ‰ƒX–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", "OK");
+                EditorUtility.DisplayDialog("Error", "ã‚¯ãƒ©ã‚¹åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", "OK");
                 return;
             }
 
             if (!AssetDatabase.IsValidFolder(_folderPath))
             {
-                EditorUtility.DisplayDialog("Error", "w’è‚³‚ê‚½ƒtƒHƒ‹ƒ_‚ª‘¶İ‚µ‚Ü‚¹‚ñB", "OK");
+                EditorUtility.DisplayDialog("Error", "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚©ãƒ«ãƒ€ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚", "OK");
                 return;
             }
 
@@ -125,11 +125,11 @@ namespace SchwesteriumLibrary.Editor
 
             if (result)
             {
-                EditorUtility.DisplayDialog("Success", $"{_className}.cs‚ğ¶¬‚µ‚Ü‚µ‚½", "OK");
+                EditorUtility.DisplayDialog("Success", $"{_className}.csã‚’ç”Ÿæˆã—ã¾ã—ãŸ", "OK");
             }
             else
             {
-                EditorUtility.DisplayDialog("Failed", $"{_className}.cs‚Ì¶¬‚É¸”s‚µ‚Ü‚µ‚½", "OK");
+                EditorUtility.DisplayDialog("Failed", $"{_className}.csã®ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸ", "OK");
             }
 
         }
@@ -140,7 +140,7 @@ namespace SchwesteriumLibrary.Editor
 
             if (File.Exists(filePath))
             {
-                Debug.LogWarning($"[Class Generator] : {fileName}.cs ‚ÍŠù‚É‘¶İ‚µ‚Ä‚¢‚Ü‚·");
+                Debug.LogWarning($"[Class Generator] : {fileName}.cs ã¯æ—¢ã«å­˜åœ¨ã—ã¦ã„ã¾ã™");
                 return false;
             }
 
@@ -180,7 +180,7 @@ namespace SchwesteriumLibrary.Editor
 Copyright (c) 2026 {_userName}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-and associated documentation files (the gSoftwareh), to deal in the Software without 
+and associated documentation files (the â€œSoftwareâ€), to deal in the Software without 
 restriction, including without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
 Software is furnished to do so, subject to the following conditions:
@@ -188,7 +188,7 @@ Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or 
 substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED gAS ISh, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+THE SOFTWARE IS PROVIDED â€œAS ISâ€, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
 THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR 
