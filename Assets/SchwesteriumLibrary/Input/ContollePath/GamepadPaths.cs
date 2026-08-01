@@ -5,6 +5,9 @@ Date   : 2026/08/01
 
 namespace SchwesteriumLibrary.Input.ContollePath
 {
+    /// <summary>
+    /// InputSystem用 ゲームパッドのコントロールパス
+    /// </summary>
     public static class GamepadPaths
     {
         public const string DPAD = "<Gamepad>/dpad";
