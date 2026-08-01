@@ -10,6 +10,9 @@ using UnityEngine.InputSystem.Users;
 
 namespace SchwesteriumLibrary.Input
 {
+    /// <summary>
+    /// ローカルマルチ用 入力ハンドラ基底クラス
+    /// </summary>
     public abstract class MultiPlayInputHandlerBase : IDisposable
     {
         private int _playerId = -1;
