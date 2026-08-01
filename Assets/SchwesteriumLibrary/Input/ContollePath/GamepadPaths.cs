@@ -3,7 +3,7 @@ Author : schwesterium
 Date   : 2026/08/01
 */
 
-namespace SchwesteriumLibrary.Input.ContollePath
+namespace SchwesteriumLibrary.Input.ControlPath
 {
     /// <summary>
     /// InputSystem用 ゲームパッドのコントロールパス
