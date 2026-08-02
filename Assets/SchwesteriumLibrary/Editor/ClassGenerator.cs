@@ -113,34 +113,27 @@ namespace SchwesteriumLibrary.Editor
         {
             if (string.IsNullOrEmpty(_className))
             {
-                EditorUtility.DisplayDialog("Error", "クラス名を入力してください。", "OK");
+                EditorDialog.DisplayAlertDialog("Hey", "クラス名を入力してください。", "OK");
                 return;
             }
 
             if (!AssetDatabase.IsValidFolder(_folderPath))
             {
-                EditorUtility.DisplayDialog("Error", "指定されたフォルダが存在しません。", "OK");
+                EditorDialog.DisplayAlertDialog("hey", "指定されたフォルダが存在しません。", "OK");
                 return;
             }
 
             var result = true;
 
-            result = CreateScript(_folderPath, _className, GetClassTemplate());
+            result = TryCreateScript(_folderPath, _className, GetClassTemplate());
 
             AssetDatabase.Refresh();
 
-            if (result)
-            {
-                EditorUtility.DisplayDialog("Success", $"{_className}.csを生成しました", "OK");
-            }
-            else
-            {
-                EditorUtility.DisplayDialog("Failed", $"{_className}.csの生成に失敗しました", "OK");
-            }
+            if (result) { Debug.Log($"Success {_className}.csを生成しました"); }
+            else { Debug.LogWarning($"Failed {_className}.csの生成に失敗しました"); }
+        }                 
 
-        }
-
-        private bool CreateScript(string folderPath, string fileName, string content)
+        private bool TryCreateScript(string folderPath, string fileName, string content)
         {
             string filePath = Path.Combine(_folderPath, fileName + ".cs");
 
