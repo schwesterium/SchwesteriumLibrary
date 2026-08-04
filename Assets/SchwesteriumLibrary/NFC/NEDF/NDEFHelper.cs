@@ -3,9 +3,9 @@ Author : schwesterium
 Date   : 2026/08/04
 */
 
+using SchwesteriumLibrary.LibSystem;
 using System;
 using UnityEngine;
-using SchwesteriumLibrary.LibSystem;
 
 namespace SchwesteriumLibrary.NFC.NDEF
 {
@@ -52,10 +52,10 @@ namespace SchwesteriumLibrary.NFC.NDEF
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">NFC Forum Type2</param>
         /// <param name="startIndex">読みたいTLV領域のTの位置</param>
         /// <returns></returns>
-        public static byte[] ReadPageNFCForumType2(byte[] data, int startIndex)
+        public static NDEFRecord GetNDEFRecord(byte[] data, int startIndex)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace SchwesteriumLibrary.NFC.NDEF
                 }
 
                 //Value
-                return data[index..(index + length)];
+                return new NDEFRecord(data[index..(index + length)]);
             }
             catch (NDEFReadException)
             {
