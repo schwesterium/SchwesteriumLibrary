@@ -3,60 +3,24 @@ Author : schwesterium
 Date   : 2026/08/02
 */
 
-using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using UnityEngine;
 
 namespace SchwesteriumLibrary.NFC
 {
-    public class NFCReader
+    [Serializable]
+    public sealed class NFCReader
     {
         private IntPtr _hContext = IntPtr.Zero;
-        IntPtr _hCard = IntPtr.Zero;
+        private IntPtr _hCard = IntPtr.Zero;
         //リーダーは一つだけ
         private NFCAPI.SCARD_READERSTATE[] _readStates = new NFCAPI.SCARD_READERSTATE[1];
 
-        public async UniTask Run(CancellationToken token)
-        {
-            try
-            {
-                if (!TryEstablishContext()) { throw new Exception("Establich Context Failed"); }
-
-                if (!TrySelectReader()) { throw new Exception("Select Failed"); }
-
-                await UniTask.WaitForEndOfFrame(token);
-
-                if (!IsReaderPresent()) { throw new Exception("No Card"); }
-
-                if (!TryReadCard()) { throw new Exception("Read Failed"); }
-
-            }
-            catch (OperationCanceledException e)
-            {
-                Debug.LogException(e);
-                Release();
-
-                return;
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-                Release();
-
-                return;
-            }
-
-            Release();
-
-            return;
-        }
-
-        private bool TryEstablishContext()
+        public bool TryEstablishContext()
         {
             var r = NFCAPI.SCARD_S_SUCCESS;
 
@@ -71,7 +35,7 @@ namespace SchwesteriumLibrary.NFC
             return true;
         }
 
-        private bool TrySelectReader()
+        public bool TrySelectReader()
         {
             var r = NFCAPI.SCARD_S_SUCCESS;
 
@@ -109,7 +73,7 @@ namespace SchwesteriumLibrary.NFC
             return true;
         }
 
-        private bool IsReaderPresent()
+        public bool IsReaderPresent()
         {
             var r = NFCAPI.SCARD_S_SUCCESS;
 
@@ -135,12 +99,14 @@ namespace SchwesteriumLibrary.NFC
             return true;
         }
 
-        private bool TryReadCard()
+        public bool TryReadCard(out byte[] data)
         {
             //SCardConnect
             //SCardControl << なくてもよい
             //SCardTransmit
             //SCardDisconnect
+
+            data = Array.Empty<byte>();
 
             uint pdwActiveProtocol = 0;
             var r = NFCAPI.SCARD_S_SUCCESS;
@@ -159,42 +125,52 @@ namespace SchwesteriumLibrary.NFC
             byte[] reciveBuffer = new byte[256 * 2];
             uint reciveLength = (uint)reciveBuffer.Length;
 
-            //IDmを取得するAPDUコマンド
-            //https://learn.microsoft.com/ja-jp/windows-hardware/drivers/nfc/storage-card-requirements
-            byte[] apduCommand = { 0xFF, 0xCA, 0x00, 0x00, 0x00 };
+            List<byte> pagedata = new List<byte>();
 
-            try
+
+            for (int i = 4; i < 44; i += 4)
             {
+                byte[] apduCommand = { 0xFF, 0xB0, 0x00, (byte)i, 0x10 };
+
                 r = NFCAPI.SCardTransmit(_hCard, ref request, apduCommand, (uint)apduCommand.Length, (IntPtr)null, reciveBuffer, ref reciveLength);
-            }
-            finally
-            {
-                Debug.Log("Disconnect");
-                Disconnect();
+                if (r != NFCAPI.SCARD_S_SUCCESS)
+                {
+                    Debug.LogWarning($"SCardTransmit Failed {r}");
+                    return false;
+                }
+
+                if (reciveLength < 2) { return false; }
+                byte sw1 = reciveBuffer[reciveLength - 2];
+                byte sw2 = reciveBuffer[reciveLength - 1];
+                if (sw1 != 0x90 || sw2 != 0x00)
+                {
+                    Debug.LogWarning($"APDU Error: {sw1:X2}{sw2:X2}");
+                    return false;
+                }
+
+                for (int j = 0; j < 16; j += 4)
+                {
+                    pagedata.Add(reciveBuffer[j]);
+                    pagedata.Add(reciveBuffer[j + 1]);
+                    pagedata.Add(reciveBuffer[j + 2]);
+                    pagedata.Add(reciveBuffer[j + 3]);
+                }
+
+
+                //受信データからIDmを抽出 
+                Debug.Log($"{i} page : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
             }
 
-            if (r != NFCAPI.SCARD_S_SUCCESS)
-            {
-                Debug.LogWarning($"SCardTransmit Failed {r}");
-                return false;
-            }
+            data = pagedata.ToArray();
 
-            if (reciveLength < 2) { return false; }
-            byte sw1 = reciveBuffer[reciveLength - 2];
-            byte sw2 = reciveBuffer[reciveLength - 1];
-            if (sw1 != 0x90 || sw2 != 0x00)
-            {
-                Debug.LogWarning($"APDU Error: {sw1:X2}{sw2:X2}");
-                return false;
-            }
-
-            //受信データからIDmを抽出 
-            Debug.Log(BitConverter.ToString(reciveBuffer, 0, (int)reciveLength));
+            Disconnect();
 
             return true;
         }
 
-        private void Disconnect()
+
+
+        public void Disconnect()
         {
             var r = NFCAPI.SCARD_S_SUCCESS;
 
@@ -205,7 +181,7 @@ namespace SchwesteriumLibrary.NFC
             }
         }
 
-        private bool Release()
+        public bool Release()
         {
             var r = NFCAPI.SCARD_S_SUCCESS;
 
