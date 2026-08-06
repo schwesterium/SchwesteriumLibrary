@@ -1,6 +1,7 @@
 # SchwesteriumLibrary
 Unitプロジェクト間で再利用できる機能をまとめたライブラリです
-詳細はWikiを参照
+
+詳細はWikiを参照 (Inputに関する情報のみ掲載中)
 
 ## 名前空間
 - `SchwesteriumLibrary.Camera`
@@ -8,6 +9,9 @@ Unitプロジェクト間で再利用できる機能をまとめたライブラ�
 - `SchwesteriumLibrary.Editor`
 - `SchwesteriumLibrary.Input`
     - `.ControlPath`
+- `SchwesteriumLibrary.LibSystem`
+- `SchwesteriumLibrary.NFC`
+    - `.NEDF`
 - `SchwesteriumLibrary.Timeline`
 - `SchwesteriumLibrary.UI`
 - `SchwesteriumLibrary.Utility`
