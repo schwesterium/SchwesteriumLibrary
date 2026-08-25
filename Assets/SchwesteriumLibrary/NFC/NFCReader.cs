@@ -127,39 +127,46 @@ namespace SchwesteriumLibrary.NFC
 
             List<byte> pagedata = new List<byte>();
 
+            byte[] apduCommand = { 0xFF, 0xCA, 0x00, 0x00, 0x00 };
 
-            for (int i = 4; i < 44; i += 4)
-            {
-                byte[] apduCommand = { 0xFF, 0xB0, 0x00, (byte)i, 0x10 };
+            r = NFCAPI.SCardTransmit(_hCard, ref request, apduCommand, (uint)apduCommand.Length, (IntPtr)null, reciveBuffer, ref reciveLength);
+            Debug.Log($"UID : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
 
-                r = NFCAPI.SCardTransmit(_hCard, ref request, apduCommand, (uint)apduCommand.Length, (IntPtr)null, reciveBuffer, ref reciveLength);
-                if (r != NFCAPI.SCARD_S_SUCCESS)
-                {
-                    Debug.LogWarning($"SCardTransmit Failed {r}");
-                    return false;
-                }
+            //apduCommand[1] = 0xB0;
+            //apduCommand[4] = 0x10;
 
-                if (reciveLength < 2) { return false; }
-                byte sw1 = reciveBuffer[reciveLength - 2];
-                byte sw2 = reciveBuffer[reciveLength - 1];
-                if (sw1 != 0x90 || sw2 != 0x00)
-                {
-                    Debug.LogWarning($"APDU Error: {sw1:X2}{sw2:X2}");
-                    return false;
-                }
+            //for (int i = 4; i < 44; i += 4)
+            //{
+            //    apduCommand[3] = (byte)i;
 
-                for (int j = 0; j < 16; j += 4)
-                {
-                    pagedata.Add(reciveBuffer[j]);
-                    pagedata.Add(reciveBuffer[j + 1]);
-                    pagedata.Add(reciveBuffer[j + 2]);
-                    pagedata.Add(reciveBuffer[j + 3]);
-                }
+            //    r = NFCAPI.SCardTransmit(_hCard, ref request, apduCommand, (uint)apduCommand.Length, (IntPtr)null, reciveBuffer, ref reciveLength);
+            //    if (r != NFCAPI.SCARD_S_SUCCESS)
+            //    {
+            //        Debug.LogWarning($"SCardTransmit Failed {r}");
+            //        return false;
+            //    }
+
+            //    if (reciveLength < 2) { return false; }
+            //    byte sw1 = reciveBuffer[reciveLength - 2];
+            //    byte sw2 = reciveBuffer[reciveLength - 1];
+            //    if (sw1 != 0x90 || sw2 != 0x00)
+            //    {
+            //        Debug.LogWarning($"APDU Error: {sw1:X2}{sw2:X2}");
+            //        return false;
+            //    }
+
+            //    for (int j = 0; j < 16; j += 4)
+            //    {
+            //        pagedata.Add(reciveBuffer[j]);
+            //        pagedata.Add(reciveBuffer[j + 1]);
+            //        pagedata.Add(reciveBuffer[j + 2]);
+            //        pagedata.Add(reciveBuffer[j + 3]);
+            //    }
 
 
-                //受信データからIDmを抽出 
-                Debug.Log($"{i} page : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
-            }
+            //    //受信データからIDmを抽出 
+            //    Debug.Log($"{i} page : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
+            //}
 
             data = pagedata.ToArray();
 
