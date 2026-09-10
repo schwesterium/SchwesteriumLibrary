@@ -6,6 +6,7 @@ Date   : 2026/08/02
 using System;
 using System.Runtime.InteropServices;
 
+//NEW
 namespace SchwesteriumLibrary.NFC
 {
     //参考 https://tomosoft.jp/design/?p=5543
@@ -59,6 +60,8 @@ namespace SchwesteriumLibrary.NFC
         public static extern uint SCardTransmit(IntPtr hCard, ref SCARD_IO_REQUEST pioSendPci, byte[] pbSendBuffer, uint cbSendLength, IntPtr pioRecvPci, byte[] pbRecvBufferm, ref uint pcbRecvLength);
 
         [DllImport("winscard.dll")]
+        public static extern uint SCardCancel(IntPtr hContext);
+        [DllImport("winscard.dll")]
         public static extern uint SCardDisconnect(IntPtr hCard, uint dwDisposition);
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -96,20 +99,31 @@ namespace SchwesteriumLibrary.NFC
             return pci;
         }
 
+
         public const uint SCARD_S_SUCCESS = 0;
         public const uint SCARD_E_TIMEOUT = 0x8010000A;
         public const uint SCARD_E_NO_SMARTCARD = 0x8010000C;
         public const uint SCARD_E_CANT_DISPOSE = 0x8010000E;
         public const uint SCARD_E_NO_SERVICE = 0x8010001D;
+        public const uint SCARD_W_REMOVED_CARD = 0x80100069;
 
         public const uint SCARD_SCOPE_USER = 0;
         public const uint SCARD_SCOPE_TERMINAL = 1;
         public const uint SCARD_SCOPE_SYSTEM = 2;
 
-        public const int SCARD_STATE_UNAWARE = 0x0000;
-        public const int SCARD_STATE_CHANGED = 0x00000002;
-        public const int SCARD_STATE_PRESENT = 0x00000020;
-        public const UInt32 SCARD_STATE_EMPTY = 0x00000010;
+        //SCARD_READERSTATEのdwCurrentStateもしくはdwEventStateで使う
+        public const uint SCARD_STATE_UNAWARE = 0x00000000;
+        public const uint SCARD_STATE_IGNORE = 0x00000001;
+        public const uint SCARD_STATE_CHANGED = 0x00000002;
+        public const uint SCARD_STATE_UNKNOWN = 0x00000004;
+        public const uint SCARD_STATE_UNAVAILABLE = 0x00000008;
+        public const uint SCARD_STATE_EMPTY = 0x00000010;
+        public const uint SCARD_STATE_PRESENT = 0x00000020;
+        public const uint SCARD_STATE_ATRMATCH = 0x00000040;
+        public const uint SCARD_STATE_EXCLUSIVE = 0x00000080;
+        public const uint SCARD_STATE_INUSE = 0x00000100;
+        public const uint SCARD_STATE_MUTE = 0x00000200;
+        public const uint SCARD_STATE_UNPOWERED = 0x00000400;
 
         public const int SCARD_SHARE_SHARED = 0x00000002;
         public const int SCARD_SHARE_EXCLUSIVE = 0x00000001;
@@ -124,12 +138,13 @@ namespace SchwesteriumLibrary.NFC
         public const int SCARD_UNPOWER_CARD = 2;
         public const int SCARD_EJECT_CARD = 3;
 
-        public const int SCARD_UNKNOWN = 0x00000000;
-        public const int SCARD_ABSENT = 0x00000001;
-        public const int SCARD_PRESENT = 0x00000002;
-        public const int SCARD_SWALLOWED = 0x00000003;
-        public const int SCARD_POWERED = 0x00000004;
-        public const int SCARD_NEGOTIABLE = 0x00000005;
-        public const int SCARD_SPECIFICMODE = 0x00000006;
+        //SCardStateのpdwStateで使う
+        public const uint SCARD_UNKNOWN = 0x00000000;
+        public const uint SCARD_ABSENT = 0x00000001;
+        public const uint SCARD_PRESENT = 0x00000002;
+        public const uint SCARD_SWALLOWED = 0x00000003;
+        public const uint SCARD_POWERED = 0x00000004;
+        public const uint SCARD_NEGOTIABLE = 0x00000005;
+        public const uint SCARD_SPECIFICMODE = 0x00000006;
     }
 }

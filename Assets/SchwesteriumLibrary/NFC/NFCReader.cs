@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 
+//NEW
 namespace SchwesteriumLibrary.NFC
 {
-    [Serializable]
     public sealed class NFCReader
     {
         private IntPtr _hContext = IntPtr.Zero;
@@ -28,7 +28,7 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardEstablishContext(NFCAPI.SCARD_SCOPE_USER, IntPtr.Zero, IntPtr.Zero, out _hContext);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"SCardEstablishContext Failed {r}");
+                Debug.LogWarning($"SCardEstablishContext Failed {r:X}");
                 return false;
             }
 
@@ -44,7 +44,7 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardListReaders(_hContext, null, null, ref readerCount);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"SCardListReaders Failed {r}");
+                Debug.LogWarning($"SCardListReaders Failed {r:X}");
                 return false;
             }
 
@@ -53,7 +53,7 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardListReaders(_hContext, null, readers, ref readerCount);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"SCardListReaders Failed {r}");
+                Debug.LogWarning($"SCardListReaders Failed {r:X}");
                 return false;
             }
 
@@ -66,11 +66,41 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardGetStatusChange(_hContext, 100, _readStates, (uint)_readStates.Length);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"Check SCardGetStatusChange Failed {r}");
+                Debug.LogWarning($"Check SCardGetStatusChange Failed {r:X}");
+                return false;
+            }
+
+            _readStates[0].dwCurrentState = _readStates[0].dwEventState & ~NFCAPI.SCARD_STATE_CHANGED;
+
+            return true;
+        }
+
+        public bool WaitForStatusChange()
+        {
+            var r = NFCAPI.SCARD_S_SUCCESS;
+
+            //カードがあるかの判別を行う
+            r = NFCAPI.SCardGetStatusChange(_hContext, 10, _readStates, (uint)_readStates.Length);
+            _readStates[0].dwCurrentState = _readStates[0].dwEventState & ~NFCAPI.SCARD_STATE_CHANGED;
+
+            if (r == NFCAPI.SCARD_E_TIMEOUT) { return false; }
+
+            if (r != NFCAPI.SCARD_S_SUCCESS)
+            {
+                Debug.LogWarning($"WaitForStatusChange Failed {r:X}");
                 return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// カードが置かれているどうか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCardPresent()
+        {
+            return (NFCAPI.SCARD_STATE_PRESENT & _readStates[0].dwEventState) == NFCAPI.SCARD_STATE_PRESENT;
         }
 
         public bool IsReaderPresent()
@@ -92,21 +122,21 @@ namespace SchwesteriumLibrary.NFC
             }
             else
             {
-                Debug.LogWarning($"Read SCardGetStatusChange Failed {r}");
+                Debug.LogWarning($"Read SCardGetStatusChange Failed {r:X}");
                 return false;
             }
 
             return true;
         }
 
-        public bool TryReadCard(out byte[] data)
+        public bool TryReadCard(out NFCReadData data)
         {
             //SCardConnect
             //SCardControl << なくてもよい
             //SCardTransmit
             //SCardDisconnect
 
-            data = Array.Empty<byte>();
+            data = null;
 
             uint pdwActiveProtocol = 0;
             var r = NFCAPI.SCARD_S_SUCCESS;
@@ -114,7 +144,8 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardConnect(_hContext, _readStates[0].szReader, NFCAPI.SCARD_SHARE_EXCLUSIVE, NFCAPI.SCARD_PROTOCOL_T0 | NFCAPI.SCARD_PROTOCOL_T1, out _hCard, out pdwActiveProtocol);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"SCardConnect Failed {r}");
+                Debug.LogWarning($"SCardConnect Failed {r:X}");
+                Disconnect();
                 return false;
             }
 
@@ -124,14 +155,29 @@ namespace SchwesteriumLibrary.NFC
 
             byte[] reciveBuffer = new byte[256 * 2];
             uint reciveLength = (uint)reciveBuffer.Length;
-
-            List<byte> pagedata = new List<byte>();
-
             byte[] apduCommand = { 0xFF, 0xCA, 0x00, 0x00, 0x00 };
 
             r = NFCAPI.SCardTransmit(_hCard, ref request, apduCommand, (uint)apduCommand.Length, (IntPtr)null, reciveBuffer, ref reciveLength);
-            Debug.Log($"UID : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
+            if (r != NFCAPI.SCARD_S_SUCCESS)
+            {
+                Debug.LogWarning($"SCardTransmit Failed {r:X}");
+                Disconnect();
+                return false;
+            }
 
+            if (reciveLength < 2) { return false; }
+            byte sw1 = reciveBuffer[reciveLength - 2];
+            byte sw2 = reciveBuffer[reciveLength - 1];
+            if (sw1 != 0x90 || sw2 != 0x00)
+            {
+                Debug.LogWarning($"APDU Error: {sw1:X2}{sw2:X2}");
+                Disconnect();
+                return false;
+            }
+
+            data = new(reciveBuffer, reciveLength);
+
+            //List<byte> pagedata = new List<byte>();
             //apduCommand[1] = 0xB0;
             //apduCommand[4] = 0x10;
 
@@ -167,15 +213,26 @@ namespace SchwesteriumLibrary.NFC
             //    //受信データからIDmを抽出 
             //    Debug.Log($"{i} page : {BitConverter.ToString(reciveBuffer, 0, (int)reciveLength - 2)}");
             //}
-
-            data = pagedata.ToArray();
+            //data = pagedata.ToArray();
 
             Disconnect();
 
             return true;
         }
 
+        public bool TryWaitCancel()
+        {
+            var r = NFCAPI.SCARD_S_SUCCESS;
 
+            r = NFCAPI.SCardCancel(_hContext);
+            if (r != NFCAPI.SCARD_S_SUCCESS)
+            {
+                Debug.LogWarning($"SCardCancel Failed {r:X}");
+                return false;
+            }
+
+            return true;
+        }
 
         public void Disconnect()
         {
@@ -184,7 +241,7 @@ namespace SchwesteriumLibrary.NFC
             r = NFCAPI.SCardDisconnect(_hCard, NFCAPI.SCARD_LEAVE_CARD);
             if (r != NFCAPI.SCARD_S_SUCCESS)
             {
-                Debug.LogWarning($"SCardDisconnect Failed {r}");
+                Debug.LogWarning($"SCardDisconnect Failed {r:X}");
             }
         }
 
