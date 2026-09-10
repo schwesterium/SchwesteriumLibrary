@@ -5,17 +5,20 @@ Date   : 2026/08/10
 
 using System;
 
-[Serializable]
-public class NFCReadData
+namespace SchwesteriumLibrary.NFC
 {
-    public byte[] Data = null;
-    public uint Length = 0;
-
-    public NFCReadData() { }
-
-    public NFCReadData(byte[] data, uint length)
+    [Serializable]
+    public class NFCReadData
     {
-        Data = data;
-        Length = length;
+        public byte[] Data = null;
+        public uint Length = 0;
+
+        public NFCReadData() { }
+
+        public NFCReadData(byte[] data, uint length)
+        {
+            Data = data;
+            Length = length;
+        }
     }
 }

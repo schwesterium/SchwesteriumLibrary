@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 
-//NEW
 namespace SchwesteriumLibrary.NFC
 {
     public sealed class NFCReader

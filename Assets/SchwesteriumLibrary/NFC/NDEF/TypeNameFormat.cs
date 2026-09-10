@@ -3,9 +3,6 @@ Author : schwesterium
 Date   : 2026/08/04
 */
 
-using System;
-using UnityEngine;
-
 namespace SchwesteriumLibrary.NFC.NDEF
 {
     public enum TypeNameFormat : byte
