@@ -1,4 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿/*
+Author : schwesterium
+Date   : 2026/08/01
+*/
+
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public static class MathUtility
