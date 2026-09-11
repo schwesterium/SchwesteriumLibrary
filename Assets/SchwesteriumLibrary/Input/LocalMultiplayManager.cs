@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace SchwesteriumLibrary.Input
 {
-    public class LocalMultiplayManager<T> : IDisposable where T : MultiPlayInputHandlerBase
+    public class LocalMultiplayManager : IDisposable
     {
         private int _maxPlayers = -1;
         private GameObject[] _playerPrefabs = null;
@@ -18,7 +18,7 @@ namespace SchwesteriumLibrary.Input
         private bool _useKeyboard = true;
         private bool _initResister = true;
 
-        private readonly List<T> _activePlayers = new();
+        private readonly List<MultiPlayInputHandlerBase> _activePlayers = new();
         private readonly HashSet<InputDevice> _pairedDevices = new();
 
         private bool _isReceiving = false;
@@ -110,7 +110,7 @@ namespace SchwesteriumLibrary.Input
         {
             var playerId = _activePlayers.Count;
 
-            if (!_playerPrefabs[playerId].TryGetComponent<IInputHandlerOwner<T>>(out var owner))
+            if (!_playerPrefabs[playerId].TryGetComponent<IInputHandlerOwner>(out var owner))
             {
                 Debug.LogError("ownerが見つかりません");
                 return;

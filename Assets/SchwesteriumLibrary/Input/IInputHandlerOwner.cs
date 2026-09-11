@@ -5,8 +5,8 @@ Date   : 2026/08/01
 
 namespace SchwesteriumLibrary.Input
 {
-    public interface IInputHandlerOwner<T> where T : MultiPlayInputHandlerBase
+    public interface IInputHandlerOwner
     {
-        public T GetInputHandler();
+        public MultiPlayInputHandlerBase GetInputHandler();
     }
 }
