@@ -89,5 +89,22 @@ namespace SchwesteriumLibrary.Utility
             return 2f * a * (f * t - Mathf.Floor(f * t)) - a;
         }
         //==============================================================================
+
+        /// <summary>
+        /// 二点間の距離を正規化したベクトルを求める
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 NormalizedDirection(in Vector3 from, in Vector3 to)
+        {
+            Vector3 result = default;
+            result.x = to.x - from.x;
+            result.y = to.y - from.y;
+            result.z = to.z - from.z;
+            result.Normalize();
+            return result;
+        }
     }
 }
