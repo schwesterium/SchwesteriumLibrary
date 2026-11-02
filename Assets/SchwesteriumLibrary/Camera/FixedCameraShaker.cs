@@ -20,20 +20,12 @@ namespace SchwesteriumLibrary.Camera
 
         //Domainのリロードをしない場合の変数リセット
 #if UNITY_EDITOR
-        private void Start()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void DomainInit()
         {
-            EditorApplication.playModeStateChanged += OnExitPlayMode;
-        }
-
-        private void OnExitPlayMode(PlayModeStateChange st)
-        {
-            if (st != PlayModeStateChange.ExitingPlayMode) { return; }
-
             _isShaking = false;
             _shakeMagnitude = 0f;
             _shakeTime = 0f;
-
-            EditorApplication.playModeStateChanged -= OnExitPlayMode;
         }
 #endif
 
