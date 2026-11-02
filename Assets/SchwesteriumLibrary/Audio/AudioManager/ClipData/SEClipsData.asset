@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd80d78cf6a3c4d93608515ae0fbad, type: 3}
+  m_Name: SEClipsData
+  m_EditorClassIdentifier: Assembly-CSharp::AkaneTools.AudioClipsData
+  ClipsDict:
+    _keyValueList:
+    - First: ThrowHarpoon
+      Second: {fileID: 8300000, guid: 4f1531431392fe64ca35cdfcd2aa6f0c, type: 3}
+    - First: HitFish
+      Second: {fileID: 8300000, guid: 2aa51fcf9f3d5e5438d75440e35da46c, type: 3}
+    - First: ReloadComplete
+      Second: {fileID: 8300000, guid: 785a97ebc6a13904080309d8f6f3a033, type: 3}
+    - First: CaptureFish
+      Second: {fileID: 8300000, guid: 8d69efaca2693ce4d8f2944edcb5423e, type: 3}
+    - First: ReelWind
+      Second: {fileID: 8300000, guid: 493dca927dbb2d447808af5a0f4a1869, type: 3}
