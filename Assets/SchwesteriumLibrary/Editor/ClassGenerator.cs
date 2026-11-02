@@ -5,6 +5,7 @@ Date   : 2026/08/01
 
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace SchwesteriumLibrary.Editor
 {
     public class ClassGenerator : EditorWindow
     {
-        private string _folderPath = "Assets/Scripts";
+        [SerializeField]
+        private List<string> _folderPaths = new List<string> { "Assets/Scripts" };
 
         private string _userName = "YourName";
 
@@ -30,7 +32,8 @@ namespace SchwesteriumLibrary.Editor
         [SerializeField]
         private SerializedObject _so = null;
 
-        private Vector2 _scrollPosition = Vector2.zero;
+        private Vector2 _inheritanceScrollPosition = Vector2.zero;
+        private Vector2 _folderPathScrollPosition = Vector2.zero;
 
         [MenuItem("SchwesteriumLibrary/Editor/ClassGenerator")]
         public static void ShowWindow()
@@ -72,7 +75,7 @@ namespace SchwesteriumLibrary.Editor
 
             _multipleInheritance = EditorGUILayout.Toggle("Use Multiple Inheritance", _multipleInheritance);
 
-            _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
+            _inheritanceScrollPosition = EditorGUILayout.BeginScrollView(_inheritanceScrollPosition);
             EditorGUILayout.PropertyField(_so.FindProperty("_inheritanceNames"));
             EditorGUILayout.EndScrollView();
 
@@ -84,7 +87,9 @@ namespace SchwesteriumLibrary.Editor
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                _folderPath = EditorGUILayout.TextField("Output Folder", _folderPath);
+                _folderPathScrollPosition = EditorGUILayout.BeginScrollView(_folderPathScrollPosition);
+                EditorGUILayout.PropertyField(_so.FindProperty("_folderPaths"));
+                EditorGUILayout.EndScrollView();
 
                 if (GUILayout.Button("Select", GUILayout.Width(60)))
                 {
@@ -93,7 +98,7 @@ namespace SchwesteriumLibrary.Editor
                     {
                         if (selectedPath.StartsWith(Application.dataPath))
                         {
-                            _folderPath = "Assets" + selectedPath.Substring(Application.dataPath.Length);
+                            _folderPaths.Add("Assets" + selectedPath.Substring(Application.dataPath.Length));
                         }
                     }
                 }
@@ -117,7 +122,7 @@ namespace SchwesteriumLibrary.Editor
                 return;
             }
 
-            if (!AssetDatabase.IsValidFolder(_folderPath))
+            if (!AssetDatabase.IsValidFolder(_folderPaths[0]))
             {
                 EditorDialog.DisplayAlertDialog("hey", "指定されたフォルダが存在しません。", "OK");
                 return;
@@ -125,17 +130,17 @@ namespace SchwesteriumLibrary.Editor
 
             var result = true;
 
-            result = TryCreateScript(_folderPath, _className, GetClassTemplate());
+            result = TryCreateScript(_folderPaths[0], _className, GetClassTemplate());
 
             AssetDatabase.Refresh();
 
             if (result) { Debug.Log($"Success {_className}.csを生成しました"); }
             else { Debug.LogWarning($"Failed {_className}.csの生成に失敗しました"); }
-        }                 
+        }
 
         private bool TryCreateScript(string folderPath, string fileName, string content)
         {
-            string filePath = Path.Combine(_folderPath, fileName + ".cs");
+            string filePath = Path.Combine(folderPath, fileName + ".cs");
 
             if (File.Exists(filePath))
             {
