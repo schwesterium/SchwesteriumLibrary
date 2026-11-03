@@ -91,10 +91,10 @@ namespace SchwesteriumLibrary.Utility
         //==============================================================================
 
         /// <summary>
-        /// 二点間の距離を正規化したベクトルを求める
+        /// 始点から終点へ向かう正規化された方向ベクトルを求める
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
+        /// <param name="from">始点</param>
+        /// <param name="to">終点</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NormalizedDirection(in Vector3 from, in Vector3 to)
