@@ -14,6 +14,14 @@ namespace SchwesteriumLibrary.Utility
         /// </summary>
         /// <param name="key">キー</param>
         /// <param name="defaultValue">キーが存在しない場合に返す値</param>
+        //
+        //  概要
+        //      与えられた整数が偶数かどうかを判定する
+        //  引数
+        //      value:
+        //  戻り値
+        //      偶数であればtrue、奇数であればfalse
+        //
         public static bool GetBool(string key, bool defaultValue)
         {
             if (PlayerPrefs.HasKey(key))

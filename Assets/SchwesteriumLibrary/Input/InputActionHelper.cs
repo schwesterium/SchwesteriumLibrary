@@ -14,7 +14,7 @@ namespace SchwesteriumLibrary.Input
         public const string KEYBOARD = "Keyboard";
         public const string GAMEPAD = "Gamepad";
 
-        public static void AddMoveAction(InputActionMap map, string actionName = "Move")
+        public static InputAction AddMoveAction(InputActionMap map, string actionName = "Move")
         {
             var moveAction = map.AddAction(actionName, InputActionType.Value);
 
@@ -24,6 +24,8 @@ namespace SchwesteriumLibrary.Input
                 .With("Down", KeyboadPaths.S, groups: KEYBOARD)
                 .With("Left", KeyboadPaths.A, groups: KEYBOARD)
                 .With("Right", KeyboadPaths.D, groups: KEYBOARD);
+
+            return moveAction;
         }
     }
 }
