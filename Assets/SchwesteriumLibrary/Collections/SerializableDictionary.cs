@@ -21,10 +21,12 @@ namespace SchwesteriumLibrary.Collections
 
         private Dictionary<Tkey, Tvalue> _dictionary = null;
 
-        /// <summary>
-        /// Dictionaryがnullでない場合はDictionaryを作成します
-        /// </summary>
-        /// <returns>Dictionaryが作成できたかどうか</returns>
+        //
+        //  概要
+        //      Dictionaryがnullでない場合はDictionaryを作成します
+        //  戻り値
+        //      Dictionaryが作成できたかどうか
+        //
         public bool TryCreateDictionary()
         {
             //Dictionaryが生成済みなら処理は行わない
@@ -41,11 +43,12 @@ namespace SchwesteriumLibrary.Collections
             return true;
         }
 
-        /// <summary>
-        /// 要素を追加する。#defineディレクティブ UNITY_EDITORが有効な場合はInspectorの更新も行う
-        /// </summary>
-        /// <param name="key">キー</param>
-        /// <param name="value">要素</param>
+        //
+        //  概要
+        //      要素を追加する。#defineディレクティブ UNITY_EDITORが有効な場合はInspectorの更新も行う
+        //  引数
+        //      key: キー, value: 要素
+        //
         public void AddElement(Tkey key, Tvalue value)
         {
             if(_dictionary == null)
@@ -62,40 +65,49 @@ namespace SchwesteriumLibrary.Collections
 #endif
         }
 
-        /// <summary>
-        /// keyの要素をvalueで更新する
-        /// </summary>
-        /// <param name="key">キー</param>
-        /// <param name="value">要素</param>
+
+        //
+        //  概要
+        //      keyの要素をvalueで更新する
+        //  引数
+        //      key: キー, value: 要素
+        //
         public void UpdateElementValue(Tkey key, Tvalue value)
         {
             _dictionary[key] = value;
         }
 
-        /// <summary>
-        /// keyの値を取得する
-        /// </summary>
-        /// <param name="key">キー</param>
-        /// <returns>keyの値 Tvalue</returns>
+        //
+        //  概要
+        //      keyの値を取得する
+        //  引数
+        //      key: キー
+        //  戻り値
+        //      keyの値 Tvalue
+        //
         public Tvalue GetElement(Tkey key)
         {
             return _dictionary[key];
         }
 
-        /// <summary>
-        /// Dictionaryに指定したキーが含まれているかどうか
-        /// </summary>
-        /// <param name="key">キー</param>
-        /// <returns>指定したキーが含まれているかどうか</returns>
+        //
+        //  概要
+        //      Dictionaryに指定したキーが含まれているかどうか
+        //  引数
+        //      key: キー
+        //  戻り値
+        //      指定したキーが含まれているかどうか
+        //
         public bool ContainsKey(Tkey key)
         {
             return _dictionary.ContainsKey(key);
         }
 
 #if UNITY_EDITOR
-        /// <summary>
-        /// Editor専用: Inspectorの更新を行う
-        /// </summary>
+        //
+        //  概要
+        //      Editor専用: Inspectorの更新を行う
+        //
         public void UpdateList()
         {
             //前提として、_dictionaryが最新の状態、_keyValueListは更新前の状態

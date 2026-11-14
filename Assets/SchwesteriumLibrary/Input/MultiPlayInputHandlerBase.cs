@@ -32,7 +32,7 @@ namespace SchwesteriumLibrary.Input
         protected abstract void ReleaseAction();
 
         /// <summary>
-        /// デバイスにハンドラーを割り当てる
+        /// ハンドラーにデバイスを割り当て、セットアップを行う
         /// </summary>
         /// <param name="device"></param>
         public void Join(InputDevice device, int playerId)

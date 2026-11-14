@@ -3,6 +3,7 @@ Author : schwesterium
 Date   : 2026/08/01
 */
 
+using System;
 using UnityEngine.InputSystem;
 
 namespace SchwesteriumLibrary.Input
@@ -10,7 +11,7 @@ namespace SchwesteriumLibrary.Input
     /// <summary>
     /// シングルプレイ用 入力ハンドラ基底クラス
     /// </summary>
-    public abstract class PlayerInputHandlerBase
+    public abstract class PlayerInputHandlerBase: IDisposable
     {
         private InputActionMap _map = null;
 
