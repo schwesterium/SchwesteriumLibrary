@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace SchwesteriumLibrary.Editor
+namespace SchwesteriumLibrary.Editor.Tools
 {
     public class ReplaceObjects : EditorWindow
     {

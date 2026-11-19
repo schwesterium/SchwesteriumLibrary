@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using SchwesteriumLibrary.Utility;
 
-namespace SchwesteriumLibrary.Editor
+namespace SchwesteriumLibrary.Editor.Tools
 {
     public class PrefabBrush : EditorWindow
     {

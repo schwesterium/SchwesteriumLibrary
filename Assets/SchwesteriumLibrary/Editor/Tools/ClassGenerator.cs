@@ -10,7 +10,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace SchwesteriumLibrary.Editor
+namespace SchwesteriumLibrary.Editor.Tools
 {
     public class ClassGenerator : EditorWindow
     {
