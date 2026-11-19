@@ -188,5 +188,19 @@ namespace SchwesteriumLibrary.Utility
 
             return (resultPos, resultRot);
         }
+
+        //
+        //  概要
+        //      Vector3を指定した桁数で丸める
+        //  引数
+        //      (ref) vector: 丸めたいvector3, digit 桁数
+        //
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void RoundVector3(ref Vector3 vector, int digit)
+        {
+            vector.x = System.MathF.Round(vector.x, digit);
+            vector.y = System.MathF.Round(vector.y, digit);
+            vector.z = System.MathF.Round(vector.z, digit);
+        }
     }
 }
