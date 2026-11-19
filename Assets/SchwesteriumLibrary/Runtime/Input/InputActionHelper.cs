@@ -20,10 +20,10 @@ namespace SchwesteriumLibrary.Input
 
             moveAction.AddBinding(GamepadPaths.LEFT_STICK, groups: GAMEPAD);
             moveAction.AddCompositeBinding("Dpad")
-                .With("Up", KeyboadPaths.W, groups: KEYBOARD)
-                .With("Down", KeyboadPaths.S, groups: KEYBOARD)
-                .With("Left", KeyboadPaths.A, groups: KEYBOARD)
-                .With("Right", KeyboadPaths.D, groups: KEYBOARD);
+                .With("Up", KeyboardPaths.W, groups: KEYBOARD)
+                .With("Down", KeyboardPaths.S, groups: KEYBOARD)
+                .With("Left", KeyboardPaths.A, groups: KEYBOARD)
+                .With("Right", KeyboardPaths.D, groups: KEYBOARD);
 
             return moveAction;
         }

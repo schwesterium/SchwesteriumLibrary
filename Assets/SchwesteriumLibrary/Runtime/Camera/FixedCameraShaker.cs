@@ -3,7 +3,6 @@ Author : schwesterium
 Date   : 2026/08/01
 */
 
-using UnityEditor;
 using UnityEngine;
 
 namespace SchwesteriumLibrary.Camera
@@ -18,8 +17,8 @@ namespace SchwesteriumLibrary.Camera
         private bool _isChild = false;
         private Vector3 _startPosition = Vector3.zero;
 
-        //Domainのリロードをしない場合の変数リセット
 #if UNITY_EDITOR
+        //Domainのリロードをしない場合の変数リセット
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void DomainInit()
         {

@@ -16,7 +16,7 @@ Unitプロジェクト間で再利用できる機能をまとめたライブラ�
     - `.ControlPath`
 - `SchwesteriumLibrary.LibSystem`
 - `SchwesteriumLibrary.NFC`
-    - `.NEDF`
+    - `.NDEF`
 - `SchwesteriumLibrary.Particle`
 - `SchwesteriumLibrary.Timeline`
 - `SchwesteriumLibrary.UI`

@@ -8,7 +8,7 @@ namespace SchwesteriumLibrary.Input.ControlPath
     /// <summary>
     /// InputSystem用 キーボードのコントロールパス
     /// </summary>
-    public static class KeyboadPaths
+    public static class KeyboardPaths
     {
         public const string ESCAPE = "<Keyboard>/escape";
         public const string SPACE = "<Keyboard>/space";

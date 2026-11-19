@@ -3,10 +3,10 @@ Author : schwesterium
 Date   : 2026/08/02
 */
 
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 using System;
 using System.Runtime.InteropServices;
 
-//NEW
 namespace SchwesteriumLibrary.NFC
 {
     //参考 https://tomosoft.jp/design/?p=5543
@@ -148,3 +148,5 @@ namespace SchwesteriumLibrary.NFC
         public const uint SCARD_SPECIFICMODE = 0x00000006;
     }
 }
+
+#endif
