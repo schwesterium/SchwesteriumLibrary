@@ -113,8 +113,6 @@ InitTestScene*.unity*
 /ProjectSettings
 /[Aa]ssets/TEST
 /[Aa]ssets/TEST.meta
-/[Aa]ssets/[Ss]chwesteriumLibrary/[Ee]ditor/TEST
-/[Aa]ssets/[Ss]chwesteriumLibrary/[Ee]ditor/TEST.meta
 
 *.inputactions
 *.inputactions.meta

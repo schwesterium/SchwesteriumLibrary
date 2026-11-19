@@ -1,0 +1,19 @@
+{
+    "name": "SchwesteriumLibrary.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e74805bd314363c4b86fd443d6af072e",
+        "GUID:91ee517a18595064ba56f17c5073b0eb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
