@@ -3,7 +3,6 @@ Author : schwesterium
 Date   : 2026/08/02
 */
 
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 using System;
 using System.Runtime.InteropServices;
 
@@ -148,5 +147,3 @@ namespace SchwesteriumLibrary.NFC
         public const uint SCARD_SPECIFICMODE = 0x00000006;
     }
 }
-
-#endif
