@@ -12,7 +12,7 @@ namespace SchwesteriumLibrary.Particle
     /// Gradientで設定した色をもとに、0~1の範囲でパーティクルの色を変えてくれる
     /// </summary>
     [RequireComponent(typeof(ParticleSystem))]
-    public class ParticleColorByValue  : MonoBehaviour
+    public class ParticleColorByValue : MonoBehaviour
     {
         [SerializeField]
         private Gradient _gradient = new Gradient();
