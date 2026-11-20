@@ -1,6 +1,6 @@
 {
     "name": "SchwesteriumLibrary.Runtime",
-    "rootNamespace": "",
+    "rootNamespace": "SchwesteriumLibrary",
     "references": [
         "GUID:e74805bd314363c4b86fd443d6af072e",
         "GUID:75469ad4d38634e559750d17036d5f7c",

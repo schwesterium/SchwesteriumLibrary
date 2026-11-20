@@ -1,6 +1,6 @@
 {
     "name": "SchwesteriumLibrary.Shared",
-    "rootNamespace": "",
+    "rootNamespace": "SchwesteriumLibrary",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
