@@ -1,12 +1,13 @@
-{
-	"name": "com.schwesterium.SchwesteriumLibrary",
+﻿{
+	"name": "com.schwesterium.schwesteriumlibrary",
 	"displayName":"SchwesteriumLibrary",
 	"version": "0.1.0",
 	"unity": "6000.3",
 	"unityRelease": "17f1",
 	"description": "hi",
 	"dependencies": {
-
+		"com.unity.inputsystem": "1.19.0",
+		"com.unity.ugui": "2.0.0"
 	},
 	"author": {
 		"name": "schwesterium",
