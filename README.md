@@ -1,7 +1,7 @@
 # SchwesteriumLibrary
 Unitプロジェクト間で再利用できる機能をまとめたライブラリです
 
-導入(UPM) : https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary#v0.1.1
+導入(UPM) : https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary#v0.1.3
 
 詳細はWikiを参照 => https://schwesterium.github.io/SchwesteriumLibraryDocs/home.html
 > [!NOTE]
