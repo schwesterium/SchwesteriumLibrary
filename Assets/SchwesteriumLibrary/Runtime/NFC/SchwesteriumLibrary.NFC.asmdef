@@ -11,6 +11,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
+        "UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN",
         "SCHWESTERIUM_HAS_UNITASK"
     ],
     "versionDefines": [

@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Author : schwesterium
 Date   : 2026/08/01
 */
@@ -19,7 +19,7 @@ namespace SchwesteriumLibrary.Timeline
 
             if (trackBinding == null) { return; }
 
-            //ƒoƒCƒ“ƒh‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Ì‰ŠúˆÊ’u
+            //ãƒã‚¤ãƒ³ãƒ‰ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸä½ç½®
             Vector3 initPosition = trackBinding.position;
 
             int inputCount = playable.GetInputCount();
@@ -65,7 +65,7 @@ namespace SchwesteriumLibrary.Timeline
                 }
             }
 
-            //ƒuƒŒƒ“ƒh‚³‚ê‚½ˆÊ’u‚É‚·‚é
+            //ãƒ–ãƒ¬ãƒ³ãƒ‰ã•ã‚ŒãŸä½ç½®ã«ã™ã‚‹
             blendedPosition += initPosition * (1f - positionTotalWeight);
             trackBinding.position = blendedPosition;
 

@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Author : schwesterium
 Date   : 2026/08/01
 */
@@ -26,7 +26,7 @@ namespace SchwesteriumLibrary.Timeline
             var transform = director.GetGenericBinding(this) as Transform;
             if (transform == null) { return; }
 
-            //Œˆ‚ß‚ç‚ê‚½ƒvƒƒpƒeƒB–¼‚ğ“ü‚ê‚é
+            //æ±ºã‚ã‚‰ã‚ŒãŸãƒ—ãƒ­ãƒ‘ãƒ†ã‚£åã‚’å…¥ã‚Œã‚‹
             driver.AddFromName<Transform>(transform.gameObject, "m_LocalPosition.x");
             driver.AddFromName<Transform>(transform.gameObject, "m_LocalPosition.y");
             driver.AddFromName<Transform>(transform.gameObject, "m_LocalPosition.z");

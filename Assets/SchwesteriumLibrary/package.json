@@ -3,7 +3,6 @@
 	"displayName":"SchwesteriumLibrary",
 	"version": "0.1.0",
 	"unity": "6000.3",
-	"unityRelease": "17f1",
 	"description": "hi",
 	"dependencies": {
 		"com.unity.inputsystem": "1.19.0",
@@ -15,5 +14,11 @@
 	},
 	"changelogUrl": "https://schwesterium.github.io/SchwesteriumLibraryDocs/changeLog.html",
 	"documentationUrl": "https://schwesterium.github.io/SchwesteriumLibraryDocs/home.html",
-	"licensesUrl": "https://schwesterium.github.io/SchwesteriumLibraryDocs/licenses.html"
+	"licensesUrl": "https://schwesterium.github.io/SchwesteriumLibraryDocs/licenses.html",
+
+	"samples":{
+   		"displayName": "AudioManager",
+   		"description": "AudioManager is here",
+   		"path": "Samples~/AudioManager"
+	}
 }

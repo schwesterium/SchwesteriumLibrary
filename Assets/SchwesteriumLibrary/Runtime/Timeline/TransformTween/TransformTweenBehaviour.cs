@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Author : schwesterium
 Date   : 2026/08/01
 */
@@ -37,22 +37,22 @@ namespace SchwesteriumLibrary.Timeline
         {
             if (!IsEasingCurveNormalised())
             {
-                Debug.LogError("Easing Curve‚ğ³‹K‰»‚µ‚Ä‚­‚¾‚³‚¢I (0 ,0) ~ (1, 1)");
+                Debug.LogError("Easing Curveã‚’æ­£è¦åŒ–ã—ã¦ãã ã•ã„ï¼ (0 ,0) ~ (1, 1)");
                 return 0f;
             }
 
             return EasingCurve.Evaluate(time);
         }
 
-        //EasingCurve‚ª0~1‚É³‹K‰»‚³‚ê‚Ä‚¢‚é‚©
+        //EasingCurveãŒ0~1ã«æ­£è¦åŒ–ã•ã‚Œã¦ã„ã‚‹ã‹
         private bool IsEasingCurveNormalised()
         {
-            //‹N“_‚ª0‚É‹ß‚¢‚©
+            //èµ·ç‚¹ãŒ0ã«è¿‘ã„ã‹
             if (!Mathf.Approximately(EasingCurve[0].time, 0f)) { return false; }
 
             if (!Mathf.Approximately(EasingCurve[0].value, 0f)) { return false; }
 
-            //I“_‚ª1‚É‹ß‚¢‚©
+            //çµ‚ç‚¹ãŒ1ã«è¿‘ã„ã‹
             if (!Mathf.Approximately(EasingCurve[EasingCurve.length - 1].time, 1f)) { return false; }
 
             return Mathf.Approximately(EasingCurve[EasingCurve.length - 1].value, 1f);
