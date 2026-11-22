@@ -1,7 +1,7 @@
 # SchwesteriumLibrary
 Unitプロジェクト間で再利用できる機能をまとめたライブラリです
 
-導入(UPM) : https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary#v0.1.3
+導入(UPM) : https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary
 
 詳細はWikiを参照 => https://schwesterium.github.io/SchwesteriumLibraryDocs/home.html
 > [!NOTE]
@@ -20,7 +20,7 @@ Unity プロジェクト間で使い回せる機能をまとめたライブラ�
 ## 導入
 
 ```
-https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary#v0.1.3
+https://github.com/schwesterium/SchwesteriumLibrary.git?path=/Assets/SchwesteriumLibrary
 ```
 
 Package Manager の「Add package from git URL」に貼る。サンプル（AudioManager）は Package Manager の Samples タブからインポートする。
